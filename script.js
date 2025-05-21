@@ -185,6 +185,41 @@ function handleSearchInput(e) {
     searchAlunos(e.target.value);
 }
 
+//Função resposta da IA
+async function sendMessage() {
+    const input = document.getElementById('userInput').value
+    const responseDiv = document.getElementById('response')
+    if (!input) {
+        responseDiv.innerHTML = 'Por favor preencha a transcrição do aluno.'
+        return
+    }
+    responseDiv.innerHTML = 'Criando plano...'
+    try {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer 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",
+                "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
+                "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "model": "deepseek/deepseek-r1-zero:free",
+                "messages": [{
+                    "role": "user",
+                    "content": input
+                }]
+            })
+    });
+    const data = await response.json()
+    console.log(data)
+        data.choices?.[0]?.message?.content || 'Nenhuma resposta recebida'
+        responseDiv.innerHTML = marked.parse(markdownText)
+    } catch (error) {
+    responseDiv.innerHTML = 'Error:' + error.message
+    }
+}
+
 // Event Listeners
 addAlunoBtn.addEventListener('click', handleAddAlunoClick);
 alunoForm.addEventListener('submit', handleFormSubmit);
@@ -201,4 +236,5 @@ alunoModal.addEventListener('click', (e) => {
 // Inicializa a aplicação
 document.addEventListener('DOMContentLoaded', () => {
     renderAlunos();
-});
+    sendMessage()
+})
