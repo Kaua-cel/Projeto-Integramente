@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Gerenciamento de Alunos</title>
+    <title>Sistema de Alunos</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Sistema Integramente</h1>
-        <button id="addAlunoBtn" class="btn">Adicionar Aluno</button>
+        <h1><i class="fas fa-user-graduate"></i> Sistema Escolar</h1>
+        <button id="addAlunoBtn" class="btn">
+            <i class="fas fa-plus"></i> Adicionar Aluno
+        </button>
     </header>
 
     <main>
-        <section>
-            <h2>Lista de Alunos</h2>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Buscar alunos...">
-            </div>
-            
-            <div class="alunos-container" id="alunosContainer">
-                <!-- Alunos serão inseridos aqui via JavaScript -->
-            </div>
-        </section>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar alunos...">
+        </div>
+
+        <h2>Lista de Alunos</h2>
+        
+        <div class="alunos-container" id="alunosContainer">
+            <!-- Alunos serão carregados aqui via JavaScript -->
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025, sistema Integramente.</p>
+        <p>Sistema desenvolvido por © 2023 Sua Escola</p>
     </footer>
 
-    <!-- Modal para adicionar/editar aluno -->
+    <!-- Modal de Adição/Edição -->
     <div class="modal" id="alunoModal">
         <div class="modal-content">
-            <h2 id="modalTitle">Adicionar Novo Aluno</h2>
+            <h3 id="modalTitle">Adicionar Novo Aluno</h3>
             
             <form id="alunoForm">
                 <input type="hidden" id="alunoId">
@@ -49,14 +50,14 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="dataNascimento">Data de Nascimento</label>
-                    <input type="date" id="dataNascimento" required>
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" min="6" max="30" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="serie">Série</label>
                     <select id="serie" required>
-                        <option value="">Selecione uma série</option>
+                        <option value="">Selecione...</option>
                         <option value="1º Ano">1º Ano</option>
                         <option value="2º Ano">2º Ano</option>
                         <option value="3º Ano">3º Ano</option>
@@ -66,19 +67,29 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="observacoes">Descrição do aluno</label>
+                    <label for="observacoes">Observações</label>
                     <textarea id="observacoes" rows="3"></textarea>
                 </div>
                 
                 <div class="modal-actions">
                     <button type="button" class="btn btn-outline" id="cancelBtn">Cancelar</button>
-                    <button type="submit" class="btn" id="userInput">Criar relatório</button>
+                    <button type="submit" class="btn">Salvar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="response"></div>
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h3 id="confirmTitle">Confirmar Exclusão</h3>
+            <p id="confirmMessage">Tem certeza que deseja excluir este aluno?</p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-outline" id="confirmCancelBtn">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

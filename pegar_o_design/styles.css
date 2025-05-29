@@ -1,6 +1,7 @@
+/* Cores Modernas */
 :root {
     --primary-color: #4361ee;
-    --secondary-color: #3a0ca3;
+    --secondary-color: hwb(118 40% 31%);
     --accent-color: #4895ef;
     --light-color: #f8f9fa;
     --dark-color: #212529;
@@ -87,7 +88,7 @@ footer {
 
 /* Componentes */
 .btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--secondary-color);
@@ -104,7 +105,7 @@ footer {
 }
 
 .btn:hover {
-    background-color: var(--primary-color);
+    background-color: hwb(128 13% 59%);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -251,8 +252,6 @@ textarea {
     background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 12px;
-    max-height: 90vh;
-    overflow-y: auto;
     max-width: 500px;
     width: 90%;
     transform: translateY(-20px);
